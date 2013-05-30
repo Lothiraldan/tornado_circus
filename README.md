@@ -1,4 +1,4 @@
 circus_tornado
 ==============
 
-A tornado application implementation compatbile with circus sockets
+A tornado application implementation compatible with circus sockets
