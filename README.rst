@@ -1,18 +1,18 @@
-circus_tornado
-==============
+circus\_tornado
+===============
 
 A tornado application implementation compatible with circus sockets.
 
-As tornado is not WSGI complient, we cannot use chaussette to run tornado
-applications with circus sockets.
+As tornado is not WSGI complient, we cannot use chaussette to run
+tornado applications with circus sockets.
 
-This project package a compatible version of tornado Application so you can
-easily run tornado with all circus awesomeness.
+This project package a compatible version of tornado Application so you
+can easily run tornado with all circus awesomeness.
 
-Use circus_tornado
-==================
+Use circus\_tornado
+===================
 
-Let's take a simple example, the hello world:
+Let's take a simple example, the hello world::
 
     import tornado.ioloop
     import tornado.web
@@ -31,14 +31,14 @@ Let's take a simple example, the hello world:
         application.listen(8888)
         tornado.ioloop.IOLoop.instance().start()
 
-If you want to run it with circus, you can't use socket web and fallback to
-launch them and let it bind its socket:
+If you want to run it with circus, you can't use socket web and fallback
+to launch them and let it bind its socket::
 
     [watcher:hello]
     cmd = python hello_world.py
 
-But good news, with circus_tornado, it's no longer true. Just import Application
-from circus_tornado package:
+But good news, with circus\_tornado, it's no longer true. Just import
+Application from circus\_tornado package::
 
     import tornado.ioloop
     import tornado.web
@@ -58,10 +58,10 @@ from circus_tornado package:
         application.listen(8888)
         tornado.ioloop.IOLoop.instance().start()
 
-One last requirement, you must call tornado.options.parse_command_line
+One last requirement, you must call tornado.options.parse\_command\_line
 **before** calling application.listen or it will doesn't works.
 
-And finally the circus configuration:
+And finally the circus configuration::
 
     [watcher:hello]
     cmd = python hello_world.py --fd=$(circus.sockets.hello)
@@ -71,9 +71,10 @@ And finally the circus configuration:
     host = 127.0.0.1
     port = 9000
 
-And you're done. You can go to http://localhost:9000 to check if it works.
+And you're done. You can go to http://localhost:9000 to check if it
+works.
 
-You can even launch a quick benchmark and check that it holds the load:
+You can even launch a quick benchmark and check that it holds the load::
 
     $> boom -n 10000 -c 100 http://localhost:9000                       10:38:48
     Server Software: TornadoServer/2.4.1
@@ -100,3 +101,4 @@ You can even launch a quick benchmark and check that it holds the load:
     -------- Legend --------
     RPS: Request Per Second
     BSI: Boom Speed Index
+
