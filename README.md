@@ -54,31 +54,12 @@ from circus_tornado package:
     ])
 
     if __name__ == "__main__":
-        application.listen(8888)
-        tornado.ioloop.IOLoop.instance().start()
-
-One more requirement, you must call tornado.options.parse_command_line
-**before** calling application.listen or it will not use circus socket. So the
-real code is:
-
-    import tornado.ioloop
-    import tornado.web
-
-    from tornado.options import parse_command_line
-    from tornado_circus import Application
-
-    class MainHandler(tornado.web.RequestHandler):
-        def get(self):
-            self.write("Hello, world")
-
-    application = Application([
-        (r"/", MainHandler),
-    ])
-
-    if __name__ == "__main__":
         parse_command_line()
         application.listen(8888)
         tornado.ioloop.IOLoop.instance().start()
+
+One last requirement, you must call tornado.options.parse_command_line
+**before** calling application.listen or it will doesn't works.
 
 And finally the circus configuration:
 
